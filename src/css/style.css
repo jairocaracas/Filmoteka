@@ -1,0 +1,44 @@
+p {
+  color: #000;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+}
+p > span {
+  color: #ff6b08;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+.section {
+  padding: 60px 0;
+}
+.container {
+  width: 882px;
+  margin: 0 auto;
+}
+.movie-card {
+  width: 274px;
+}
+.poster-container {
+  width: 274px;
+  height: 398px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.poster {
+  width: 274px;
+  height: 398px;
+  object-fit: cover;
+}
+
+.movies-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
