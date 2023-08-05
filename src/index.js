@@ -1,6 +1,6 @@
-import { renderMovieCards } from './js/render-movies';
-import { fetchTrends } from './js/fetch-trends';
-import { fetchMovie } from './js/fetch-movie';
+import { renderMovieCards } from './js/render-movies.js';
+import { fetchTrends } from './js/fetch-trends.js';
+import { fetchMovie } from './js/fetch-movie.js';
 
 let moviesGallery = document.querySelector('.movies-gallery');
 

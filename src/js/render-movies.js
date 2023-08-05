@@ -1,4 +1,4 @@
-import { getGenreById } from './fetch-genres';
+import { getGenreById } from './fetch-genres.js';
 
 async function renderMovieCards(fetchFunction, div) {
   let renderCards = await fetchFunction;

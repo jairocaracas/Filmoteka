@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { options } from './options';
+import { options } from './options.js';
 
 async function fetchGenre() {
   try {
