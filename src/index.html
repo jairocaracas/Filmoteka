@@ -6,9 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Filmoteka</title>
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <div class="container header">
+
+      <nav class="navigation">
+        <a class="navigation__logo" href="#"> Filmoteka </a>
+        <ul class="navigation__menu list">
+          <li class="navigation__item">
+            <a href="" class="navigation__link navigation__link--current">HOME</a>
+          </li>
+          <li class="navigation__item">
+            <a href="" class="navigation__link">MY LIBRARY</a>
+          </li>
+        </ul>
+      </nav>
+
+      <form class="form">
+        <input type="text" class="form__input" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+        <button type="submit" class="form__button">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+
+    </div>
+  </header>
+
+
+
   <div class="section">
     <div class="container">
       <div class="movies-gallery">
