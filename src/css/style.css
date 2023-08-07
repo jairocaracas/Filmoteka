@@ -16,24 +16,6 @@ header {
     url('../images/header-main.jpeg');
 }
 
-p {
-  color: #000;
-  font-family: Roboto;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 133.333% */
-}
-
-p > span {
-  color: var(--accent-color);
-  font-family: Roboto;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-}
-
 .section {
   padding: 60px 0;
 }
@@ -46,6 +28,8 @@ p > span {
 .list {
   list-style: none;
 }
+
+/*-------------------- Header --------------------*/
 
 .header {
   height: 100%;
@@ -102,29 +86,99 @@ p > span {
   background-color: var(--accent-color);
 }
 
+/*-------------------- Form --------------------*/
+
 .form {
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.form__input {
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid #fff;
+  width: 336px;
+  height: 22px;
+  color: #fff;
+}
+
+.form__input:focus {
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid var(--accent-color);
+  width: 336px;
+  height: 22px;
+  color: #fff;
+}
+
+.form__button {
+  position: absolute;
+  right: 278px;
+  top: 2px;
+  border: none;
+  background: none;
+  color: #fff;
+}
+
+/*-------------------- movies --------------------*/
+
+.movies-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .movie-card {
   width: 274px;
 }
-.poster-container {
+.movie-card__poster {
   width: 274px;
   height: 398px;
   border-radius: 5px;
   overflow: hidden;
 }
 
-.poster {
+.movie-card__image {
   width: 274px;
   height: 398px;
   object-fit: cover;
 }
 
-.movies-gallery {
+.movie-card__text {
+  color: #000;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  padding-top: 10px;
+}
+
+.movie-card__text--accent {
+  color: var(--accent-color);
+}
+
+/*-------------------- Footer --------------------*/
+footer {
+  background: #f7f7f7;
+}
+
+.footer {
+  height: 77px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__text {
+  color: #545454;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer__text--accent {
+  color: var(--accent-color);
 }

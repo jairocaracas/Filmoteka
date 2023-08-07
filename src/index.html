@@ -11,40 +11,11 @@
 </head>
 
 <body>
-  <header>
-    <div class="container header">
 
-      <nav class="navigation">
-        <a class="navigation__logo" href="#"> Filmoteka </a>
-        <ul class="navigation__menu list">
-          <li class="navigation__item">
-            <a href="" class="navigation__link navigation__link--current">HOME</a>
-          </li>
-          <li class="navigation__item">
-            <a href="" class="navigation__link">MY LIBRARY</a>
-          </li>
-        </ul>
-      </nav>
-
-      <form class="form">
-        <input type="text" class="form__input" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-        <button type="submit" class="form__button">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
-
-    </div>
-  </header>
-
-
-
-  <div class="section">
-    <div class="container">
-      <div class="movies-gallery">
-      </div>
-    </div>
-  </div>
-
+  <include src="./partials/header.html"></include>
+  <include src="./partials/movies-gallery.html"></include>
+  <include src="./partials/footer.html"></include>
+  <include src="./partials/modal.html"></include>
 
   <script type="module" src="./index.js"></script>
 </body>

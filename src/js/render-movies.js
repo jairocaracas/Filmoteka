@@ -9,12 +9,15 @@ async function renderMovieCards(fetchFunction, div) {
       async ({ genre_ids, id, poster_path, release_date, title }) => {
         let genre = await getGenreById(genre_ids);
         return `<div class="movie-card" >
-          <div class="poster-container">
-       <img class="poster" id="${id}" src="https://image.tmdb.org/t/p/original${poster_path}" alt="${title}" loading="lazy"/>
+          <div class="movie-card__poster">
+       <img class="movie-card__image" id="${id}" src="https://image.tmdb.org/t/p/original${poster_path}" alt="${title}" loading="lazy"/>
        </div>
-  <div class="info">
-  <p class="info-item">${title.toUpperCase()} <br/>
-    <span> ${genre} | ${release_date.slice(0, 4)} </span></p>
+  <div class="movie-card__info">
+  <p class="movie-card__text">${title.toUpperCase()} <br/>
+    <span class="movie-card__text movie-card__text--accent"> ${genre} | ${release_date.slice(
+          0,
+          4
+        )} </span></p>
   </div>
   </div>`;
       }
