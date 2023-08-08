@@ -2,8 +2,6 @@ import { options } from './options.js';
 import axios from 'axios';
 import * as basicLightbox from 'basiclightbox';
 
-const modale = document.querySelector('.modal');
-
 async function fetchMovie(e) {
   e.preventDefault();
   if (e.target.nodeName === 'IMG') {
@@ -16,80 +14,118 @@ async function fetchMovie(e) {
     try {
       // Realiza la petición utilizando Axios
       const response = await axios.get(apiUrl, options);
-      const data = response.data;
-      console.log(data);
+      const movieData = response.data;
+      console.log(movieData);
 
-      // Configura un controlador de evento para abrir el modal al hacer clic en la imagen
+      // Construye el marcado de la película
+      const instance = basicLightbox.create(`
+        <div class="film-card__wrapper">
+          <div class="film-card__image-left">
+            <img
+              class="film-card__image"
+              src="https://image.tmdb.org/t/p/original${movieData.poster_path}"
+              alt="film"
+            /> 
+          </div>
+
+          <div class="film-card__description-right">
+            <h2 class="film-card__description-title">${movieData.title}</h2>
+            <ul class="film-card__description-set">
+              <li class="description-set">
+                <p class="description-set__text">Vote / Votes</p>
+                <p class="description-set__value">
+                  <span class="description-set__rating">${
+                    movieData.vote_average
+                  }</span>
+                  <span class="description-set__separator">/</span>
+                  <span class="description-set__vote">${
+                    movieData.vote_count
+                  }</span>
+                </p>
+              </li>
+              <li class="description-set">
+                <p class="description-set__text">Popularity</p>
+                <p class="description-set__value">${movieData.popularity}</p>
+              </li>
+              <li class="description-set">
+                <p class="description-set__text">Original Title</p>
+                <p class="description-set__value">${
+                  movieData.original_title
+                }</p>
+              </li>
+              <li class="description-set">
+                <p class="description-set__text">Genre</p>
+                <p class="description-set__value">${movieData.genres
+                  .map(genre => genre.name)
+                  .join(', ')}</p>
+              </li>
+            </ul>
+
+            <div class="film-card__description-about">
+              <h2 class="description-about__title">About</h2>
+              <p class="description-about__text">
+                ${movieData.overview}
+              </p>
+            </div>
+
+            <div class="film-card__description-button">
+              <button class="description-button description-button__watched" data-id="${movieId}">
+                add to Watched
+              </button>
+              <button class="description-button description-button__queue" data-id="${movieId}">
+                add to queue
+              </button>
+            </div>
+          </div>
+        </div>`);
+
+      instance.show();
+
+      // Array para almacenar las películas
+      let watchedMovies = [];
+      let queueMovies = [];
+
+      // Función para guardar las películas en Local Storage
+      function saveMoviesToLocalStorage() {
+        localStorage.setItem('movies-Watched', JSON.stringify(watchedMovies)); //JSON.stringify convierte de objeto js a JSON
+        localStorage.setItem('movies-Queue', JSON.stringify(queueMovies));
+      }
+
+      // Función para cargar las películas desde Local Storage
+      function loadMoviesFromLocalStorage() {
+        watchedMovies =
+          JSON.parse(localStorage.getItem('movies-Watched')) || []; // JSON.parse convierte de JSON a objeto js
+        queueMovies = JSON.parse(localStorage.getItem('movies-Queue')) || [];
+      }
+
+      const watchedButton = instance
+        .element()
+        .querySelector('.description-button__watched');
+      const queueButton = instance
+        .element()
+        .querySelector('.description-button__queue');
+
+      watchedButton.addEventListener('click', () => {
+        if (!watchedMovies.includes(movieId)) {
+          watchedMovies.push(movieId);
+          saveMoviesToLocalStorage();
+          console.log('Movie added to watched :', movieId);
+        }
+      });
+
+      queueButton.addEventListener('click', () => {
+        if (!queueMovies.includes(movieId)) {
+          queueMovies.push(movieId);
+          saveMoviesToLocalStorage();
+          console.log('Movie added to Queue:', movieId);
+        }
+      });
+      // Cargar las películas desde Local Storage al inicio
+      loadMoviesFromLocalStorage();
     } catch (error) {
       console.error('Error fetching movie:', error);
     }
   }
 }
+
 export { fetchMovie };
-
-function markup() {
-  const markup = data
-    .map(movie => {
-      return `
-    <div class="film-card__wrapper">
-      <div class="film-card__image-left">
-        <img
-          class="film-card__image"
-          src="https://image.tmdb.org/t/p/original${movie.poster_path}"
-          alt="film"
-        /> 
-      </div>
-
-      <div class="film-card__description-right">
-        <h2 class="film-card__description-title">${movie.title}</h2>
-        <ul class="film-card__description-set">
-          <li class="description-set">
-            <p class="description-set__text">Vote / Votes</p>
-            <p class="description-set__value">
-              <span class="description-set__rating">${movie.vote_average}</span>
-              <span class="description-set__separator">/</span>
-              <span class="description-set__vote">${movie.vote_count}</span>
-            </p>
-          </li>
-          <li class="description-set">
-            <p class="description-set__text">Popularity</p>
-            <p class="description-set__value">${movie.popularity}</p>
-          </li>
-          <li class="description-set">
-            <p class="description-set__text">Original Title</p>
-            <p class="description-set__value">${movie.original_title}</p>
-          </li>
-          <li class="description-set">
-            <p class="description-set__text">Genre</p>
-            <p class="description-set__value">${movie.genresList}</p>
-          </li>
-        </ul>
-
-        <div class="film-card__description-about">
-          <h2 class="description-about__title">About</h2>
-          <p class="description-about__text">
-            ${movie.modifiedOverwiew}
-          </p>
-        </div>
-
-        <div class="film-card__description-button">
-          <button class="description-button description-button__watched">
-            add to Watched
-          </button>
-          <button class="description-button description-button__queue">
-            add to queue
-          </button>
-        </div>
-      </div>
-    </div>`;
-    })
-    .join(' ');
-
-  modale.innerHTML = markup;
-
-  // Crea el modal utilizando basicLightbox
-  const modal = basicLightbox.create(modalContent);
-
-  // Configura un controlador de evento para abrir el modal al hacer clic en la imagen
-  modal.show();
-}
