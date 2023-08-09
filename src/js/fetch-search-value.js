@@ -1,11 +1,8 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import { options } from './options.js';
-import { renderMovieCards } from "./render-movies.js";
 
-let form = document.querySelector('.form');
 let inputForm = document.querySelector('.form__input');
-let moviesGallery = document.querySelector('.movies-gallery');
 
 let searchData;
 let data;
@@ -34,9 +31,4 @@ async function fetchData() {
 	}
 }
 
-form.addEventListener('submit', (event) => {
-	event.preventDefault();
-	renderMovieCards(fetchData(), moviesGallery);
-});
-
-export { data };
+export { fetchData };
