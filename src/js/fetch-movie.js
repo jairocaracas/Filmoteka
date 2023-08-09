@@ -6,7 +6,7 @@ async function fetchMovie(e) {
   e.preventDefault();
   if (e.target.nodeName === 'IMG') {
     const movieId = e.target.getAttribute('id');
-    console.log(movieId);
+    // console.log(movieId);
 
     // Construye la URL del API con el ID de la película
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
@@ -15,11 +15,16 @@ async function fetchMovie(e) {
       // Realiza la petición utilizando Axios
       const response = await axios.get(apiUrl, options);
       const movieData = response.data;
-      console.log(movieData);
+      // console.log(movieData);
 
       // Construye el marcado de la película
       const instance = basicLightbox.create(`
         <div class="film-card__wrapper">
+
+       <button class="modal__btnX" data-modal-close>
+          <span class="modal__iconX">✕</span>
+      </button>
+
           <div class="film-card__image-left">
             <img
               class="film-card__image"
@@ -32,8 +37,8 @@ async function fetchMovie(e) {
             <h2 class="film-card__description-title">${movieData.title}</h2>
             <ul class="film-card__description-set">
               <li class="description-set">
-                <p class="description-set__text">Vote / Votes</p>
-                <p class="description-set__value">
+                <div class="description-set__text">Vote / Votes</div>
+                <div class="description-set__value">
                   <span class="description-set__rating">${
                     movieData.vote_average
                   }</span>
@@ -41,23 +46,25 @@ async function fetchMovie(e) {
                   <span class="description-set__vote">${
                     movieData.vote_count
                   }</span>
-                </p>
+                </div>
               </li>
               <li class="description-set">
-                <p class="description-set__text">Popularity</p>
-                <p class="description-set__value">${movieData.popularity}</p>
+                <div class="description-set__text">Popularity</div>
+                <div class="description-set__value popularity">${
+                  movieData.popularity
+                }</div>
               </li>
               <li class="description-set">
-                <p class="description-set__text">Original Title</p>
-                <p class="description-set__value">${
+                <div class="description-set__text">Original Title</div>
+                <div class="description-set__value">${
                   movieData.original_title
-                }</p>
+                }</div>
               </li>
               <li class="description-set">
-                <p class="description-set__text">Genre</p>
-                <p class="description-set__value">${movieData.genres
+                <div class="description-set__text">Genre</div>
+                <div class="description-set__value genres">${movieData.genres
                   .map(genre => genre.name)
-                  .join(', ')}</p>
+                  .join(', ')}</div>
               </li>
             </ul>
 
@@ -79,7 +86,19 @@ async function fetchMovie(e) {
           </div>
         </div>`);
 
+      //evento de clic al botón de "X" para cerrar
+      const closeButton = instance.element().querySelector('.modal__btnX');
+      closeButton.addEventListener('click', () => {
+        instance.close();
+      });
+
       instance.show();
+      // oprimir tecla Esp para salir de modal
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          instance.close();
+        }
+      });
 
       // Array para almacenar las películas
       let watchedMovies = [];
@@ -97,7 +116,7 @@ async function fetchMovie(e) {
           JSON.parse(localStorage.getItem('movies-Watched')) || []; // JSON.parse convierte de JSON a objeto js
         queueMovies = JSON.parse(localStorage.getItem('movies-Queue')) || [];
       }
-
+      // Clases de botones solo al abrir modal
       const watchedButton = instance
         .element()
         .querySelector('.description-button__watched');
@@ -106,22 +125,43 @@ async function fetchMovie(e) {
         .querySelector('.description-button__queue');
 
       watchedButton.addEventListener('click', () => {
-        if (!watchedMovies.includes(movieId)) {
-          watchedMovies.push(movieId);
+        if (watchedMovies.includes(movieId)) {
+          watchedMovies = watchedMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
-          console.log('Movie added to watched :', movieId);
+          watchedButton.classList.remove('active'); // Remover la clase activa
+          console.log('Movie removed from watched:', movieId);
+        } else {
+          watchedMovies.push(movieId); // añadir la película de la lista
+          saveMoviesToLocalStorage();
+          watchedButton.classList.add('active'); // añadir la clase activa
+          console.log('Movie added to watched:', movieId);
         }
       });
 
       queueButton.addEventListener('click', () => {
-        if (!queueMovies.includes(movieId)) {
-          queueMovies.push(movieId);
+        if (queueMovies.includes(movieId)) {
+          queueMovies = queueMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
-          console.log('Movie added to Queue:', movieId);
+          queueButton.classList.remove('active'); // Remover la clase activa
+          console.log('Movie removed from queue:', movieId);
+        } else {
+          queueMovies.push(movieId); // añadir la película de la lista
+          saveMoviesToLocalStorage();
+          queueButton.classList.add('active'); // añadir la clase activa
+          console.log('Movie added to queue:', movieId);
         }
       });
       // Cargar las películas desde Local Storage al inicio
       loadMoviesFromLocalStorage();
+
+      // Verificar si la película ya está en la lista de películas guardadas y agregar clase activa
+      if (watchedMovies.includes(movieId)) {
+        watchedButton.classList.add('active');
+      }
+
+      if (queueMovies.includes(movieId)) {
+        queueButton.classList.add('active');
+      }
     } catch (error) {
       console.error('Error fetching movie:', error);
     }

@@ -1,3 +1,4 @@
+/* basicLightbox */
 .basicLightbox {
     position: fixed;
     display: flex;
@@ -63,6 +64,7 @@
     transform: scale(1);
 }
 
+/* card */
 .film-card__wrapper {
     display: flex;
     width: 806px;
@@ -74,34 +76,70 @@
     position: relative;
 }
 
+/* buttons */
 .description-set {
-    gap: 35px;
-    display: flex;
+    grid-template-columns: 1fr 2fr;
+    display: grid;
+    margin-top: 6px;
 }
 
 .description-button {
-    text-align: center;
     color: #000;
     background-color: rgba(0, 0, 0, 0);
-    border: 1px solid #000;
     border-radius: 5px;
     font-size: 12px;
-    font-weight: 500;
-    line-height: 1.3;
-    transition: background-color .25s cubic-bezier(.4, 0, .2, 1), color .25s cubic-bezier(.4, 0, .2, 1);
-    padding: 10px 20px;
+    font-weight: 700;
+    padding: 13px 14px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 1000ms;
+    position: relative;
+    overflow: hidden;
+    outline: 2px solid #f74e31;
 }
 
 .description-button:hover {
     color: #fff;
-    background-color: #ff6b08;
+    background-color: #f74e31;
     border-color: rgba(0, 0, 0, 0);
     cursor: pointer;
+    transform: scale(1.1);
+    outline: 2px solid #70bdca;
+    box-shadow: 4px 5px 17px -4px #268391;
 }
+
+ 
+.description-button::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #f74e31;
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width 1000ms;
+}
+
+.description-button:hover::before {
+    width: 250%;
+}
+/* añade clase al boton */
+.description-button.active {
+    background-color: #f74e31;
+    color: #fff;
+    box-shadow: 4px 5px 17px -4px #000;
+}
+
+
+/* card-info */
 
 .film-card__image {
     width: 375px;
-    height: 478px;
+    height: 100%;
 }
 
 .film-card__description-title {
@@ -114,7 +152,91 @@
 }
 
 .film-card__description-set {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    margin-top: 35px;
+}
+
+
+/* descripciones */
+
+.description-set__value{
+    color: #000;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.description-set__text{
+    color: #8c8c8c;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.description-set__rating{
+    background-color: #e04345;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 3px;
+    padding: 1px 5px;
+}
+
+.film-card__description-about{
+    margin-top: 25px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.description-about__title{
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.film-card__description-button{
+    margin-top: 33px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.description-about__text{
+    font-size: 13px;
+}
+
+/* icon cerrar */
+.modal__btnX {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border: 1px solid #fff;
+    background: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 400ms;
+    transition-timing-function: ease-in;
+    font-weight: 900;
+}
+
+.modal__btnX:hover {
+    color: #e04345;
+    transform: rotate(360deg);
+    border: 1px solid #e54b4b;
+}
+
+.modal__btnX:hover .modal__iconX {
+    color: #e04345;
+
+}
+
+.modal__iconX:hover {
+    cursor: pointer;
+    color: #e04345;
 }
