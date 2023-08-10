@@ -17,7 +17,7 @@ async function renderMovieCards(fetchFunction, div) {
 
         return `<div class="movie-card" >
           <div class="movie-card__poster">
-       <img class="movie-card__image" id="${id}" src="https://image.tmdb.org/t/p/original${poster_path}" alt="${title}" loading="lazy"/>
+       <img class="movie-card__image" id="${id}" src="https://image.tmdb.org/t/p/original${poster_path}" alt="${title}" onerror = "this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'" loading="lazy"/>
        </div>
   <div class="movie-card__info">
   <p class="movie-card__text">${title.toUpperCase()} <br/>

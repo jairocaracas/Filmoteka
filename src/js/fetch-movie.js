@@ -31,6 +31,7 @@ async function fetchMovie(e) {
             <img
               class="film-card__image"
               src="https://image.tmdb.org/t/p/original${movieData.poster_path}"
+							onerror = "this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'"
               alt="film"
             /> 
           </div>
