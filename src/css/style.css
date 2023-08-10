@@ -17,7 +17,7 @@ header {
 }
 
 .section {
-  padding: 60px 0;
+	padding: 60px 0;
 }
 
 .container {
@@ -132,6 +132,11 @@ header {
 .movie-card {
   width: 274px;
 }
+
+.movie-card:hover {
+	cursor: pointer;
+}
+
 .movie-card__poster {
   width: 274px;
   height: 398px;
@@ -181,4 +186,89 @@ footer {
 
 .footer__text--accent {
   color: var(--accent-color);
+}
+
+/*-------------------- Members Info --------------------*/
+
+.members__info-modal {
+	display: flex;
+	width: 90vw;
+	height: 80vh;
+	background-color: #fff;
+	border-radius: 3px;
+	margin: 0 auto;
+	padding: 50px 20px 30px 20px;
+	position: relative;
+}
+
+.members__info-container {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	gap: 10px;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+.members__info-member {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.members__info-member--name,
+.members__info-member--role {
+	padding: 10px;
+	text-align: center;
+}
+
+.members__info-member--picture {
+	width: 300px;
+	height: 400px;
+	margin-bottom: 20px;
+	border-radius: 3px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: center;
+}
+
+.member1 {
+	background-image: url('../images/Jairo_Caracas.jpeg');
+}
+
+.member2 {
+	background-image: url('../images/Andres_Urango.jpeg');
+}
+
+.member3 {
+	background-image: url('../images/David_Sora.jpeg');
+}
+
+.member4 {
+	background-image: url('../images/Steven_Romero.jpeg');
+}
+
+.members__info-member--links {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.members__info-member--linkedin,
+.members__info-member--github {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	transition: box-shadow 0.4s ease;
+}
+
+.members__info-member--linkedin:hover,
+.members__info-member--github:hover {
+	background-color: var(--accent-color);
+	fill: #fff;
+	box-shadow: 4px 4px 15px 0 #888888;
 }

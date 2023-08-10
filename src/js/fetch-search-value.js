@@ -12,7 +12,9 @@ let page = 1;
 async function fetchData() {
 	searchData = inputForm.value;
 	try {
-		Notiflix.Loading.circle();
+		Notiflix.Loading.circle({
+			svgColor: '#ff6b08',
+		});
 		const response = await axios.get(
 			`https://api.themoviedb.org/3/search/movie?query=${searchData}&include_adult=false&language=en-US&page=${page}`, options);
 		data = response.data.results;
