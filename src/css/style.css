@@ -85,6 +85,34 @@ header {
   height: 3px;
   background-color: var(--accent-color);
 }
+/*-------------------- header__library --------------------*/
+.header__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.header__button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.header__button:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.header__button:focus {
+  outline: none;
+  background-color: var(--accent-color);
+  color: #fff;
+}
 
 /*-------------------- Form --------------------*/
 

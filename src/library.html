@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filmoteka - Library</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container header">
+        <nav class="navigation">
+          <a class="navigation__logo" href="#"> Filmoteka </a>
+          <div class="movies-library">
+            <div class="header__buttons">
+              <button id="watchedButton" class="header__button">Watched</button>
+              <button id="queueButton" class="header__button">Queue</button>
+            </div>
+          </div>
+          <ul class="navigation__menu list">
+            <li class="navigation__item">
+              <a href="./index.html" class="navigation__link">HOME</a>
+            </li>
+            <li class="navigation__item">
+              <a href="" class="navigation__link navigation__link--current"
+                >MY LIBRARY</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="movies-gallery">
+      <div class="watched-movies"></div>
+      <div class="queue-movies"></div>
+    </div>
+    <include src="./partials/movies-gallery.html"></include>
+    <include src="./partials/footer.html"></include>
+    <include src="./partials/modal.html"></include>
+    <script type="module" src="./js/library-functionality.js"></script>
+  </body>
+</html>
