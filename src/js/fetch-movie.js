@@ -1,6 +1,7 @@
 import { options } from './options.js';
 import axios from 'axios';
 import * as basicLightbox from 'basiclightbox';
+import Notiflix from 'notiflix';
 
 async function fetchMovie(e) {
   e.preventDefault();
@@ -12,11 +13,12 @@ async function fetchMovie(e) {
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
     try {
+      Notiflix.Loading.dots('Loading movie...');
       // Realiza la petición utilizando Axios
       const response = await axios.get(apiUrl, options);
       const movieData = response.data;
       // console.log(movieData);
-
+      Notiflix.Loading.remove();
       // Construye el marcado de la película
       const instance = basicLightbox.create(`
         <div class="film-card__wrapper">
@@ -129,12 +131,18 @@ async function fetchMovie(e) {
           watchedMovies = watchedMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
           watchedButton.classList.remove('active'); // Remover la clase activa
-          console.log('Movie removed from watched:', movieId);
+          Notiflix.Notify.info(
+            `Película "${movieData.title}" removida de "Vistas"`
+          );
+          // console.log('Movie removed from watched:', movieId);
         } else {
           watchedMovies.push(movieId); // añadir la película de la lista
           saveMoviesToLocalStorage();
           watchedButton.classList.add('active'); // añadir la clase activa
-          console.log('Movie added to watched:', movieId);
+          Notiflix.Notify.success(
+            `Película "${movieData.title}" añadida a "Vistas"`
+          );
+          // console.log('Movie added to watched:', movieId);
         }
       });
 
@@ -143,12 +151,19 @@ async function fetchMovie(e) {
           queueMovies = queueMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
           queueButton.classList.remove('active'); // Remover la clase activa
-          console.log('Movie removed from queue:', movieId);
+
+          Notiflix.Notify.info(
+            `Película "${movieData.title}" removida de "Cola"`
+          );
+          // console.log('Movie removed from queue:', movieId);
         } else {
           queueMovies.push(movieId); // añadir la película de la lista
           saveMoviesToLocalStorage();
           queueButton.classList.add('active'); // añadir la clase activa
-          console.log('Movie added to queue:', movieId);
+          Notiflix.Notify.success(
+            `Película "${movieData.title}" añadida a "Cola"`
+          );
+          // console.log('Movie added to queue:', movieId);
         }
       });
       // Cargar las películas desde Local Storage al inicio
@@ -163,7 +178,9 @@ async function fetchMovie(e) {
         queueButton.classList.add('active');
       }
     } catch (error) {
-      console.error('Error fetching movie:', error);
+      Notiflix.Notify.failure(
+        'Error al cargar la película. Por favor, intenta nuevamente más tarde.'
+      );
     }
   }
 }
