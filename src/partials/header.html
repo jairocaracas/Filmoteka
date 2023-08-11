@@ -1,25 +1,28 @@
 <header>
-    <div class="container header">
+  <div class="container header">
+    <nav class="navigation">
+      <a class="navigation__logo" href="#"> Filmoteka </a>
+      <ul class="navigation__menu list">
+        <li class="navigation__item">
+          <a href="" class="navigation__link navigation__link--current">HOME</a>
+        </li>
+        <li class="navigation__item">
+          <a href="./library.html" class="navigation__link">MY LIBRARY</a>
+        </li>
+      </ul>
+    </nav>
 
-        <nav class="navigation">
-            <a class="navigation__logo" href="#"> Filmoteka </a>
-            <ul class="navigation__menu list">
-                <li class="navigation__item">
-                    <a href="" class="navigation__link navigation__link--current">HOME</a>
-                </li>
-                <li class="navigation__item">
-                    <a href="" class="navigation__link">MY LIBRARY</a>
-                </li>
-            </ul>
-        </nav>
-
-        <form class="form">
-            <input type="text" class="form__input" name="searchQuery" autocomplete="off"
-                placeholder="Search movies..." />
-            <button type="submit" class="form__button">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-        </form>
-
-    </div>
+    <form class="form">
+      <input
+        type="text"
+        class="form__input"
+        name="searchQuery"
+        autocomplete="off"
+        placeholder="Search movies..."
+      />
+      <button type="submit" class="form__button">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </form>
+  </div>
 </header>
