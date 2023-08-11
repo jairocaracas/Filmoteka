@@ -158,7 +158,36 @@ header {
 .movie-card__text--accent {
   color: var(--accent-color);
 }
+/*-------------------- Paginacion --------------------*/
+.pagination__list {
+  display: flex;
+  justify-content: center;
+}
 
+.pagination__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pagination__item :not(.pagination__item--dots) {
+  cursor: pointer;
+}
+
+.pagination__item--arrow {
+  background: #f7f7f7;
+}
+
+.pagination__item--active {
+  background: var(--accent-color);
+  color: white;
+}
 /*-------------------- Footer --------------------*/
 footer {
   background: #f7f7f7;
