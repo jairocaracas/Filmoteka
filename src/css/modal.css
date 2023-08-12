@@ -245,7 +245,41 @@
 /* querys */
 
 /* Estilos para tabletas (entre 768px y 1279px) */
-@media screen and (min-width: 768px) and (max-width: 1279px) {}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .film-card__wrapper {
+        width: 602px;
+        height: 420px;
+    }
+
+    .film-card__image {
+        width: 300px;
+    }
+
+}
 
 /* Estilos para móviles (entre 768px y 767px) */
-@media screen and (min-width: 320px) and (max-width: 767px) {}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .film-card__wrapper {
+        width: 300px;
+        height: 72vh;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    .description-button{
+        padding: 12px 9px;
+    }
+    
+    .film-card__image {
+        width: 100%;
+    }
+
+    .description-set {
+        grid-template-columns: 1fr 0.7fr;
+    }
+
+    .film-card__description-right {
+    margin-left: 0;
+    }
+}
