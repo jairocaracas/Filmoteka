@@ -132,6 +132,7 @@ async function fetchMovie(e) {
           watchedMovies = watchedMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
           watchedButton.classList.remove('active'); // Remover la clase activa
+          watchedButton.textContent = 'add to watched';
           Notiflix.Notify.info(
             `Película "${movieData.title}" removida de "Vistas"`
           );
@@ -140,6 +141,7 @@ async function fetchMovie(e) {
           watchedMovies.push(movieId); // añadir la película de la lista
           saveMoviesToLocalStorage();
           watchedButton.classList.add('active'); // añadir la clase activa
+          watchedButton.textContent = 'remove from watched';
           Notiflix.Notify.success(
             `Película "${movieData.title}" añadida a "Vistas"`
           );
@@ -152,7 +154,7 @@ async function fetchMovie(e) {
           queueMovies = queueMovies.filter(id => id !== movieId); // Eliminar la película de la lista
           saveMoviesToLocalStorage();
           queueButton.classList.remove('active'); // Remover la clase activa
-
+          queueButton.textContent = 'add to queue';
           Notiflix.Notify.info(
             `Película "${movieData.title}" removida de "Cola"`
           );
@@ -161,6 +163,7 @@ async function fetchMovie(e) {
           queueMovies.push(movieId); // añadir la película de la lista
           saveMoviesToLocalStorage();
           queueButton.classList.add('active'); // añadir la clase activa
+          queueButton.textContent = 'remove from queue';
           Notiflix.Notify.success(
             `Película "${movieData.title}" añadida a "Cola"`
           );
@@ -173,10 +176,12 @@ async function fetchMovie(e) {
       // Verificar si la película ya está en la lista de películas guardadas y agregar clase activa
       if (watchedMovies.includes(movieId)) {
         watchedButton.classList.add('active');
+        watchedButton.textContent = 'remove from queue';
       }
 
       if (queueMovies.includes(movieId)) {
         queueButton.classList.add('active');
+        queueButton.textContent = 'remove from queue';
       }
     } catch (error) {
       Notiflix.Notify.failure(

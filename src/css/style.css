@@ -245,6 +245,40 @@ footer {
   color: var(--accent-color);
 }
 
+/* Media Querys */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .movies-gallery {
+      width: 768px;
+      justify-content: center;
+    }
+    
+    .container {
+      width: 768px;
+    }
+}
+
+/* Estilos para móviles (entre 768px y 767px) */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .movies-gallery {
+      width: 320px;
+      justify-content: center;
+    }
+
+  .container {
+    width: 320px;
+  }
+  
+  .footer__text {
+    font-size: 20px;
+    line-height:35px;
+}
+
+
+.form__button {
+    right: 15px;
+}
+}
+
 /*-------------------- Members Info --------------------*/
 
 .members__info-modal {
