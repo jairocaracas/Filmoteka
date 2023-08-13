@@ -255,13 +255,25 @@
         width: 300px;
     }
 
+    .film-card__description-title {
+        font-size: 16px;
+    }
+
+    .film-card__description-set {
+        margin-top: 20px;
+    }
+
+    .film-card__description-about {
+    margin-top: 15px;
+    line-height: 16px;
+    }
 }
 
 /* Estilos para móviles (entre 768px y 767px) */
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .film-card__wrapper {
         width: 300px;
-        height: 72vh;
+        height: 70vh;
         display: flex;
         flex-direction: column;
         overflow: auto;
@@ -280,6 +292,13 @@
     }
 
     .film-card__description-right {
-    margin-left: 0;
+        margin-left: 0;
     }
+
+    .film-card__description-title {
+        font-size: 17px;
+        margin-top: 15px;
+    }
+
 }
+
