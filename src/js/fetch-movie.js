@@ -119,63 +119,25 @@ async function fetchMovie(e) {
 
 				if(setWatchedMovies(movieId, movieData.title)) {
 					watchedButton.classList.add('active'); // añadir la clase activa
+					watchedButton.textContent = 'remove from watched';
 				} 
 				else {
 					watchedButton.classList.remove('active'); // Remover la clase activa
+					watchedButton.textContent = 'add to watched';
 				}				
       });
 
       queueButton.addEventListener('click', () => {
 				if(setQueuedMovies(movieId, movieData.title)) {
 					queueButton.classList.add('active'); // añadir la clase activa
+					queueButton.textContent = 'remove from queue';
 				}
 				else {
 					queueButton.classList.remove('active'); // Remover la clase activa
+					queueButton.textContent = 'add to queue';
 				}
-
-        if (watchedMovies.includes(movieId)) {
-          watchedMovies = watchedMovies.filter(id => id !== movieId); // Eliminar la película de la lista
-          saveMoviesToLocalStorage();
-          watchedButton.classList.remove('active'); // Remover la clase activa
-          watchedButton.textContent = 'add to watched';
-          Notiflix.Notify.info(
-            `Película "${movieData.title}" removida de "Vistas"`
-          );
-          // console.log('Movie removed from watched:', movieId);
-        } else {
-          watchedMovies.push(movieId); // añadir la película de la lista
-          saveMoviesToLocalStorage();
-          watchedButton.classList.add('active'); // añadir la clase activa
-          watchedButton.textContent = 'remove from watched';
-          Notiflix.Notify.success(
-            `Película "${movieData.title}" añadida a "Vistas"`
-          );
-          // console.log('Movie added to watched:', movieId);
-        }
       });
 
-      queueButton.addEventListener('click', () => {
-        if (queueMovies.includes(movieId)) {
-          queueMovies = queueMovies.filter(id => id !== movieId); // Eliminar la película de la lista
-          saveMoviesToLocalStorage();
-          queueButton.classList.remove('active'); // Remover la clase activa
-          queueButton.textContent = 'add to queue';
-          Notiflix.Notify.info(
-            `Película "${movieData.title}" removida de "Cola"`
-          );
-          // console.log('Movie removed from queue:', movieId);
-        } else {
-          queueMovies.push(movieId); // añadir la película de la lista
-          saveMoviesToLocalStorage();
-          queueButton.classList.add('active'); // añadir la clase activa
-          queueButton.textContent = 'remove from queue';
-          Notiflix.Notify.success(
-            `Película "${movieData.title}" añadida a "Cola"`
-          );
-          // console.log('Movie added to queue:', movieId);
-        }
-
-      });
 			
       // Cargar las películas desde Local Storage al inicio
       loadMoviesFromLocalStorage();
@@ -183,7 +145,7 @@ async function fetchMovie(e) {
       // Verificar si la película ya está en la lista de películas guardadas y agregar clase activa
       if (watchedMovies.includes(movieId)) {
         watchedButton.classList.add('active');
-        watchedButton.textContent = 'remove from queue';
+        watchedButton.textContent = 'remove from watched';
       }
 
       if (queueMovies.includes(movieId)) {
