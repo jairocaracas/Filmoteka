@@ -158,11 +158,139 @@ header {
 }
 
 .movie-card {
-  width: 274px;
+	width: 274px;
+	position: relative;
+	overflow: hidden;
 }
 
-.movie-card:hover {
+.movie-card:hover .movie-card__menu {
+	transform: translateY(-160px);
+}
+
+.movie-card__menu {
+	width: 274px;
+	height: 160px;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255, 255, 255, 0.9);
+	/* background-color: rgba(0, 0, 0, 0.5); */
+	border-radius: 5px;
+	transition: transform 0.4s ease;
+}
+
+.movie-card__buttons {
+	height: 137px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	background-color: transparent;
+}
+
+.movie-card__buttons--watched, .movie-card__buttons--queue {
+	width: 110px;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	fill: #616161;
+}
+
+.movie-card__buttons--watched:hover,
+.movie-card__buttons--queue:hover {
 	cursor: pointer;
+	fill: var(--accent-color);
+}
+
+.movie-card__buttons--watched:focus-visible,
+.movie-card__buttons--watched:focus-within,
+.movie-card__buttons--watched:focus,
+.movie-card__buttons--queue:focus-visible,
+.movie-card__buttons--queue:focus-within,
+.movie-card__buttons--queue:focus {
+	border: none;
+}
+
+.activebutton-queue {
+	fill: rgb(255, 61, 47);
+	transform: scale(1);
+	animation-name: beat;
+	animation-duration: 0.5s;
+}
+
+.inactivebutton-queue {
+	fill: #616161;
+	transform: scale(1);
+	animation-name: reversebeat;
+	animation-duration: 0.5s;
+}
+
+.activebutton-watched {
+	fill: dodgerblue;
+	transform: scale(1);
+	animation-name: beat;
+	animation-duration: 0.5s;
+}
+
+.inactivebutton-watched {
+	fill: #616161;
+	transform: scale(1);
+	animation-name: reversebeat;
+	animation-duration: 0.5s;
+}
+
+@keyframes beat {
+	0% {
+		transform: scale(0);
+	}
+	20% {
+		transform: scale(0.3);
+	}
+	40% {
+		transform: scale(0.6);
+	}
+	60% {
+		transform: scale(0.9);
+	}
+	80% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes reversebeat {
+	0% {
+		transform: scale(1);
+	}
+
+	20% {
+		transform: scale(1.2);
+	}
+
+	40% {
+		transform: scale(0.9);
+	}
+
+	60% {
+		transform: scale(0.6);
+	}
+
+	80% {
+		transform: scale(0.3);
+	}
+
+	100% {
+		transform: scale(0);
+	}
 }
 
 .movie-card__poster {

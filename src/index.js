@@ -3,7 +3,6 @@ import { fetchTrends } from './js/fetch-trends.js';
 import { fetchMovie } from './js/fetch-movie.js';
 
 import { element } from './js/pagination.js';
-
 import { fetchData } from './js/fetch-search-value.js';
 import { membersInfo } from './js/members-info.js';
 
