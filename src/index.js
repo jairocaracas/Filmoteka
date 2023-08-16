@@ -5,7 +5,7 @@ import { fetchMovie } from './js/fetch-movie.js';
 import { element } from './js/pagination.js';
 import { fetchData } from './js/fetch-search-value.js';
 import { membersInfo } from './js/members-info.js';
-
+import '../src/js/scroll-indicator.js';
 
 let form = document.querySelector('.form');
 let moviesGallery = document.querySelector('.movies-gallery');
@@ -16,9 +16,9 @@ let listItem = document.querySelector('#pag');
 renderMovieCards(fetchTrends(1), moviesGallery);
 element(20, 1);
 
-form.addEventListener('submit', (event) => {
-	event.preventDefault();
-	renderMovieCards(fetchData(), moviesGallery);
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  renderMovieCards(fetchData(), moviesGallery);
 });
 
 moviesGallery.addEventListener('click', fetchMovie);
@@ -31,4 +31,3 @@ listItem.addEventListener('click', e => {
 });
 
 footerLink.addEventListener('click', membersInfo);
-
