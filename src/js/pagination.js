@@ -5,24 +5,38 @@ function element(totalPages, page) {
   let activeItem;
 
   let beforePages, afterPages, lowerLimit, higherLimit;
-  let showedPages = 7; // Debe ser impar
-  let middlePage = 4;
+  let showedPages = 9; // Debe ser impar
+  let middlePage = 5;
 
-  if (page > 1) {
-    liTag += `<li class="pagination__item pagination__item--arrow" id="back" onclick="element(20,${
-      page - 1
-    })"><i class="fas fa-arrow-left"></i></li>`;
+  //condicionales para los limites
+  if (totalPages <= showedPages) {
+    (lowerLimit = 1), (higherLimit = totalPages);
+  } else {
+    if (page <= middlePage) {
+      (lowerLimit = 1), (higherLimit = showedPages);
+      if (totalPages > showedPages) {
+        higherLimit = showedPages - 2;
+      }
+    } else if (page >= totalPages - middlePage + 1) {
+      (lowerLimit = totalPages - showedPages + 3), (higherLimit = totalPages);
+      console.log('acas');
+    } else {
+      // beforePages = Number(page) - 3;
+      // afterPages = Number(page) + 3;
+      lowerLimit = Number(page) - 2;
+      higherLimit = Number(page) + 2;
+    }
   }
 
-  if (page <= middlePage) {
-    afterPages = showedPages - page;
-    beforePages = showedPages - afterPages;
-    (lowerLimit = 1), (higherLimit = showedPages);
-  } else {
-    beforePages = Number(page) - 3;
-    afterPages = Number(page) + 3;
-    lowerLimit = beforePages;
-    higherLimit = afterPages;
+  //Condicionales para  habilitar o deshabilitar los botones de flecha
+  if (page > 1) {
+    liTag += `<li class="pagination__item pagination__item--arrow" id="back"></li>`;
+  }
+
+  //condicionales para mostrar la primera pagina y los puntos
+  if (page > middlePage && totalPages > showedPages) {
+    liTag += `<li class="pagination__item pagination__item--number"><span>1</span></li>
+    <li class="pagination__item pagination__item--dots"><span>...</span></li>`;
   }
 
   for (let pageLength = lowerLimit; pageLength <= higherLimit; pageLength++) {
@@ -34,9 +48,18 @@ function element(totalPages, page) {
     liTag += `<li class="pagination__item pagination__item--number ${activeItem}"><span>${pageLength}</span></li>`;
   }
 
-  if (page < totalPages) {
-    liTag += `<li class="pagination__item pagination__item--arrow" id="next"><i class="fa-solid fa-arrow-right"></i></li>`;
+  //condicionales para mostrar la ultima pagina y los puntos
+  if (page < totalPages - middlePage + 1 && totalPages > showedPages) {
+    liTag += `<li class="pagination__item pagination__item--dots"><span>...</span></li>
+    <li class="pagination__item pagination__item--number"><span>${totalPages}</span></li>`;
   }
+
+  //Condicionales para  habilitar o deshabilitar los botones de flecha
+
+  if (page < totalPages) {
+    liTag += `<li class="pagination__item pagination__item--arrow" id="next"></li>`;
+  }
+
   list.innerHTML = liTag;
 }
 

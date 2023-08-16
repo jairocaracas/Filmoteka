@@ -13,12 +13,15 @@ let footerLink = document.querySelector('.footer__link');
 
 let listItem = document.querySelector('#pag');
 
+let currentPage = 'trends';
+
 renderMovieCards(fetchTrends(1), moviesGallery);
-element(20, 1);
+// element(20, 1);
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  renderMovieCards(fetchData(), moviesGallery);
+  currentPage = 'search';
+  renderMovieCards(fetchData(1), moviesGallery);
 });
 
 moviesGallery.addEventListener('click', fetchMovie);
@@ -26,8 +29,12 @@ moviesGallery.addEventListener('click', fetchMovie);
 listItem.addEventListener('click', e => {
   let nextPage = e.target.querySelector('span').innerText;
   console.log(nextPage);
-  renderMovieCards(fetchTrends(nextPage), moviesGallery);
-  element(20, nextPage);
+  if (currentPage === 'trends') {
+    renderMovieCards(fetchTrends(nextPage), moviesGallery);
+  }
+  if (currentPage === 'search') {
+    renderMovieCards(fetchData(nextPage), moviesGallery);
+  }
 });
 
 footerLink.addEventListener('click', membersInfo);
