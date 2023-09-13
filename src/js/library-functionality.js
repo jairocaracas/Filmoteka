@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { options } from './options.js';
 import { renderMovieCards } from './render-movies.js';
+import { fetchMovie } from './fetch-movie.js';
 
 const moviesContainer = document.querySelector('.movies-gallery');
 
 let watchedMovies = JSON.parse(localStorage.getItem('movies-Watched')) || [];
 let queueMovies = JSON.parse(localStorage.getItem('movies-Queue')) || [];
 let emptyStorageScreen = document.querySelector('.section-empty');
-
-let currenPage;
 
 async function fetchSingleMovie(id) {
   try {
@@ -63,5 +62,7 @@ const queueButton = document.querySelector('#queueButton');
 
 watchedButton.addEventListener('click', renderWatchedMovies);
 queueButton.addEventListener('click', renderQueueMovies);
+
+moviesContainer.addEventListener('click', fetchMovie);
 
 export { renderWatchedMovies, renderQueueMovies };

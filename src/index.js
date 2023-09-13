@@ -16,7 +16,6 @@ let listItem = document.querySelector('#pag');
 let currentPage = 'trends';
 
 renderMovieCards(fetchTrends(1), moviesGallery);
-// element(20, 1);
 
 form.addEventListener('submit', event => {
   event.preventDefault();
